@@ -6,7 +6,8 @@ rating_page = response.text
 
 soup = BeautifulSoup(rating_page, 'html.parser')
 
-td_tags = soup.select('td')[:4]
+tr_tag = soup.select('tr')[1]
+td_tags = tr_tag.select('td')
 
 for tag in td_tags:
     print(tag.get_text())

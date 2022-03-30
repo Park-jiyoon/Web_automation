@@ -1,4 +1,4 @@
-#데이터를 엑셀파일로
+
 import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook

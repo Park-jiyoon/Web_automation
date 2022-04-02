@@ -1,4 +1,8 @@
 #selenium
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -9,11 +13,18 @@ driver.implicitly_wait(3)
 
 driver.get('https://workey.codeit.kr/costagram/index')
 
-driver.find_element_by_css_selector('.top-nav__login-link').click()
+wait = WebDriverWait(driver, 3)
 
-driver.find_element_by_css_selector('.login-container__login-input').send_keys('codeit')
-driver.find_element_by_css_selector('.login-container__password-input').send_keys('datascience')
+login_link = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.top-nav__login-link')))
+login_link.click()
 
-driver.find_element_by_css_selector('.login-container__login-button').click()
+id_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.login-container__login-input')))
+id_box.send_keys('codeit')
 
+pw_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.login-container__password-input')))
+pw_box.send_keys('datascience')
 
+login_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.login-container__login-button')))
+login_button.click()
+
+driver.quit()
